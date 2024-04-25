@@ -1,3 +1,5 @@
+import Email from "./Email"
+
 export default function EmailList({emails, hideRead, currentTab, toggleRead, toggleStar}) {
 
     const getReadEmails = emails => emails.filter(email => !email.read)
@@ -14,31 +16,7 @@ export default function EmailList({emails, hideRead, currentTab, toggleRead, tog
     return (
         <main className="emails">
         <ul>
-          {filteredEmails.map((email, index) => (
-            <li
-              key={index}
-              className={`email ${email.read ? 'read' : 'unread'}`}
-            >
-              <div className="select">
-                <input
-                  className="select-checkbox"
-                  type="checkbox"
-                  checked={email.read}
-                  onChange={() => toggleRead(email)}
-                />
-              </div>
-              <div className="star">
-                <input
-                  className="star-checkbox"
-                  type="checkbox"
-                  checked={email.starred}
-                  onChange={() => toggleStar(email)}
-                />
-              </div>
-              <div className="sender">{email.sender}</div>
-              <div className="title">{email.title}</div>
-            </li>
-          ))}
+          <Email filteredEmails={filteredEmails} toggleRead={toggleRead} toggleStar={toggleStar}/>
         </ul>
       </main>
     )
